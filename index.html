@@ -2124,15 +2124,15 @@ select.form-input { appearance: none; cursor: pointer;
       <div class="form-card fade-in">
         <h3>📋 문의하기</h3>
         <p>수업 과목, 시간표, 수강료 등 궁금한 점을 남겨주세요.</p>
-        <form id="inquiryForm" onsubmit="return handleInquiry(event)">
+        <form id="inquiryForm">
           <div class="form-row">
             <div class="form-group">
               <label>학생 이름 <span class="req">*</span></label>
-              <input type="text" class="form-input" placeholder="학생 이름" required>
+              <input type="text" name="name" class="form-input" placeholder="학생 이름" required>
             </div>
             <div class="form-group">
               <label>학년 <span class="req">*</span></label>
-              <select class="form-input" required>
+              <select name="grade" class="form-input" required>
                 <option value="">선택해 주세요</option>
                 <option>초등 1학년</option><option>초등 2학년</option>
                 <option>초등 3학년</option><option>초등 4학년</option>
@@ -2144,11 +2144,11 @@ select.form-input { appearance: none; cursor: pointer;
           </div>
           <div class="form-group">
             <label>학부모 연락처 <span class="req">*</span></label>
-            <input type="tel" class="form-input" placeholder="010-0000-0000" required>
+            <input type="tel" name="phone" class="form-input" placeholder="010-0000-0000" required>
           </div>
           <div class="form-group">
             <label>관심 과목</label>
-            <select class="form-input">
+            <select name="subject" class="form-input">
               <option value="">선택해 주세요</option>
               <option>초등 수학</option>
               <option>중등 수학</option>
@@ -2162,7 +2162,7 @@ select.form-input { appearance: none; cursor: pointer;
           </div>
           <div class="form-group">
             <label>문의 유형</label>
-            <select class="form-input">
+            <select name="type" class="form-input">
               <option value="">선택해 주세요</option>
               <option>수업 상담</option>
               <option>시간표 문의</option>
@@ -2173,7 +2173,7 @@ select.form-input { appearance: none; cursor: pointer;
           </div>
           <div class="form-group">
             <label>문의 내용</label>
-            <textarea class="form-input" placeholder="궁금하신 내용을 자유롭게 작성해 주세요."></textarea>
+            <textarea name="message" class="form-input" placeholder="궁금하신 내용을 자유롭게 작성해 주세요."></textarea>
           </div>
           <div class="form-group">
             <div class="form-check">
@@ -2189,15 +2189,15 @@ select.form-input { appearance: none; cursor: pointer;
       <div class="form-card fade-in">
         <h3>📝 수업 신청 · 예약</h3>
         <p>체험 수업 또는 정규 등록을 신청해 주세요.</p>
-        <form id="applyForm" onsubmit="return handleApply(event)">
+        <form id="applyForm">
           <div class="form-row">
             <div class="form-group">
               <label>학생 이름 <span class="req">*</span></label>
-              <input type="text" class="form-input" placeholder="학생 이름" required>
+              <input type="text" name="name" class="form-input" placeholder="학생 이름" required>
             </div>
             <div class="form-group">
               <label>학년 <span class="req">*</span></label>
-              <select class="form-input" required>
+              <select name="grade" class="form-input" required>
                 <option value="">선택해 주세요</option>
                 <option>초등 1학년</option><option>초등 2학년</option>
                 <option>초등 3학년</option><option>초등 4학년</option>
@@ -2209,11 +2209,11 @@ select.form-input { appearance: none; cursor: pointer;
           </div>
           <div class="form-group">
             <label>학부모 연락처 <span class="req">*</span></label>
-            <input type="tel" class="form-input" placeholder="010-0000-0000" required>
+            <input type="tel" name="phone" class="form-input" placeholder="010-0000-0000" required>
           </div>
           <div class="form-group">
             <label>신청 과목 <span class="req">*</span></label>
-            <select class="form-input" required>
+            <select name="subject" class="form-input" required>
               <option value="">선택해 주세요</option>
               <option>초등 수학</option>
               <option>중등 수학</option>
@@ -2227,7 +2227,7 @@ select.form-input { appearance: none; cursor: pointer;
           </div>
           <div class="form-group">
             <label>신청 유형 <span class="req">*</span></label>
-            <select class="form-input" required>
+            <select name="type" class="form-input" required>
               <option value="">선택해 주세요</option>
               <option>체험 수업 신청</option>
               <option>정규 등록 신청</option>
@@ -2236,11 +2236,11 @@ select.form-input { appearance: none; cursor: pointer;
           </div>
           <div class="form-group">
             <label>희망 요일 / 시간대</label>
-            <input type="text" class="form-input" placeholder="예: 월·수·금 오후 4시">
+            <input type="text" name="schedule" class="form-input" placeholder="예: 월·수·금 오후 4시">
           </div>
           <div class="form-group">
             <label>추가 요청사항</label>
-            <textarea class="form-input" placeholder="현재 학습 상황이나 특별히 원하시는 점을 알려주세요."></textarea>
+            <textarea name="message" class="form-input" placeholder="현재 학습 상황이나 특별히 원하시는 점을 알려주세요."></textarea>
           </div>
           <div class="form-group">
             <div class="form-check">
@@ -3619,30 +3619,7 @@ document.querySelectorAll('.faq-question').forEach(btn => {
 });
 
 // ---- Form handling ----
-function handleInquiry(e) {
-  e.preventDefault();
-  const form = e.target;
-  const data = new FormData(form);
-  // In production, send to Firebase or email API here
-  console.log('문의 접수:', Object.fromEntries(data));
-  document.getElementById('modalMessage').innerHTML =
-    '문의가 정상적으로 접수되었습니다.<br>빠른 시일 내에 연락드리겠습니다.';
-  document.getElementById('successModal').classList.add('open');
-  form.reset();
-  return false;
-}
-
-function handleApply(e) {
-  e.preventDefault();
-  const form = e.target;
-  const data = new FormData(form);
-  console.log('수업 신청:', Object.fromEntries(data));
-  document.getElementById('modalMessage').innerHTML =
-    '수업 신청이 정상적으로 접수되었습니다.<br>확인 후 개별 연락드리겠습니다.';
-  document.getElementById('successModal').classList.add('open');
-  form.reset();
-  return false;
-}
+// 문의·신청 폼 전송은 하단의 Firebase 모듈 스크립트에서 처리합니다.
 
 function closeModal() {
   document.getElementById('successModal').classList.remove('open');
@@ -3712,6 +3689,95 @@ document.addEventListener('keydown', (e) => {
     }
   }
 });
+</script>
+
+<!-- ============ FIREBASE (문의·신청 폼 → Firestore) ============ -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBzXGCiepiJpWJBTqb4dgyzePJf-qa2u98",
+  authDomain: "mirae-n-math-xi-home-page.firebaseapp.com",
+  projectId: "mirae-n-math-xi-home-page",
+  storageBucket: "mirae-n-math-xi-home-page.firebasestorage.app",
+  messagingSenderId: "764587447535",
+  appId: "1:764587447535:web:f4f3ef82d09b26d230f71a"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+function showSuccessModal(html) {
+  document.getElementById('modalMessage').innerHTML = html;
+  document.getElementById('successModal').classList.add('open');
+}
+
+// 공통 폼 전송 로직 (문의 / 신청 모두 사용)
+async function submitForm(form, collectionName, successHtml) {
+  const data = Object.fromEntries(new FormData(form));
+
+  // (7) 필수값 검증 — 이름·연락처가 비어 있으면 전송 차단
+  const name = (data.name || '').trim();
+  const phone = (data.phone || '').trim();
+  if (!name || !phone) {
+    alert('학생 이름과 학부모 연락처는 반드시 입력해 주세요.');
+    return;
+  }
+
+  // (4) 전송 중 버튼 비활성화 + 텍스트 변경 (중복 제출 방지)
+  const btn = form.querySelector('.form-submit');
+  const originalText = btn ? btn.textContent : '';
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = '전송 중...';
+  }
+
+  try {
+    // (3) createdAt 은 서버 타임스탬프로 저장
+    await addDoc(collection(db, collectionName), {
+      ...data,
+      createdAt: serverTimestamp()
+    });
+
+    // (5) 저장이 실제로 완료된 뒤에만 성공 모달 표시
+    form.reset();
+    showSuccessModal(successHtml);
+  } catch (err) {
+    // (6) 실패 시 사용자 안내 + 콘솔에 원인 출력
+    console.error('[' + collectionName + '] Firestore 저장 실패:', err);
+    alert('전송 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.\n문제가 계속되면 전화로 문의해 주세요.');
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = originalText;
+    }
+  }
+}
+
+const inquiryForm = document.getElementById('inquiryForm');
+if (inquiryForm) {
+  inquiryForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    submitForm(
+      inquiryForm,
+      'inquiries',
+      '문의가 정상적으로 접수되었습니다.<br>빠른 시일 내에 연락드리겠습니다.'
+    );
+  });
+}
+
+const applyForm = document.getElementById('applyForm');
+if (applyForm) {
+  applyForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    submitForm(
+      applyForm,
+      'applications',
+      '수업 신청이 정상적으로 접수되었습니다.<br>확인 후 개별 연락드리겠습니다.'
+    );
+  });
+}
 </script>
 </body>
 </html>
